@@ -19,6 +19,7 @@ javascript:(function t() {
   ship.style.height = '5%';
   ship.style.position = 'absolute';
   ship.style.top = '0px';
+  ship.style.background='black';
   ship.style.left = 0;
   ship.vel = 0;
   document.body.appendChild(ship);
@@ -55,6 +56,13 @@ javascript:(function t() {
   start_button.style.height = '100px';
   start_button.style.margin = '-50px -50px 0 0';
 
+  var score = document.createElement('div');
+  score.style.fontSize = '30px';
+  score.style.textAlign = 'center';
+  score.style.margin = 'auto';
+
+  score.innerHTML = 0;
+
   document.body.style.height = '100%';
   document.body.style.width = '100%';
   
@@ -65,6 +73,7 @@ javascript:(function t() {
   document.body.appendChild(pipe_bot);
   document.body.appendChild(ship);
   document.body.appendChild(start_button);
+  document.body.appendChild(score);
 
   // MAIN LOOP
 
@@ -96,6 +105,18 @@ javascript:(function t() {
       pipe_top.style.right = (parseFloat(pipe_top.style.right) + PIPE_VEL) + '%';
       pipe_bot.style.right = (parseFloat(pipe_bot.style.right) + PIPE_VEL) + '%';
      
+      // update score
+      score.innerHTML = parseInt(score.innerHTML) + PIPE_VEL;
+      if (parseInt(score.innerHTML) < 10) {
+        
+      } else if (parseInt(score.innerHTML) % 500 < 5) {
+        score.style.fontSize='100px';
+      } else if (parseInt(score.innerHTML) % 100 < 5) {
+        score.style.fontSize='50px';
+      } else {
+        score.style.fontSize='30px';
+      }
+
       // reset pipes if off screen
       if (parseFloat(pipe_top.style.right) >= 100) {
         pipe_top.style.right = 0;
@@ -112,8 +133,10 @@ javascript:(function t() {
         PIPE_VEL = PIPE_STOP;
       }
       if (parseFloat(ship.style.top) >= 95) {
-        alert('you lost!!')
+        alert('YOUR SCORE WAS: ' + score.innerHTML)
         clearInterval(y);
+
+        score.innerHTML = '0';
         
         PIPE_VEL = PIPE_MOVE;
 
@@ -127,4 +150,4 @@ javascript:(function t() {
     }, 20);
   }
   x = jQuery(start_button).on('click', main);
-})();
+}());

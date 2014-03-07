@@ -46,17 +46,20 @@ javascript:(function t() {
   pipe_bot.style.pointerEvents='none';
 
   //start button
-  var start_button = document.createElement('div');
-  start_button.innerHTML = 'GET READY:';
+  var start_button = document.createElement('img');
+  start_button.src = 'http://www.designdownloader.com/item/pngl/arrow_m01_right/arrow_m01_right-20111002134151-00025.png';
   start_button.style.position = 'absolute';
-  start_button.style.top   = '46%';
-  start_button.style.right = '46%';
-  start_button.style.fontSize = '30px'
-  start_button.style.color = 'green';
-  start_button.style.margin = '0 -20px 0 0';
+  start_button.style.top   = '50%';
+  start_button.style.right = '50%';
+  start_button.style.width = '100px';
+  start_button.style.height = '100px';
+  start_button.style.margin = '-50px -50px 0 0';
 
   document.body.style.height = '100%';
   document.body.style.width = '100%';
+  
+  document.body.parentNode.style.height = '100%';
+  document.body.parentNode.style.width = '100%';
 
   document.body.appendChild(pipe_top);
   document.body.appendChild(pipe_bot);

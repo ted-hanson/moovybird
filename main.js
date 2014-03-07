@@ -6,7 +6,9 @@ javascript:(function t() {
   var PIPE_MOVE = 1;
   var PIPE_VEL = PIPE_MOVE;
  
-  var logo_src = jQuery('[src*=logo], [src*=Logo]')[0].src;
+  var logo = jQuery('[src*=logo], [src*=Logo]')[0];
+
+  var logo_src = (logo) ? logo.src : 'http://static2.businessinsider.com/image/52f914bd6da811fa73092e3f-960/flappy-bird-icon-faby.jpg'; 
 
 
   // remove page
@@ -18,8 +20,10 @@ javascript:(function t() {
   ship.style.width = '10%';
   ship.style.height = '5%';
   ship.style.position = 'absolute';
-  ship.style.top = '0px';
-  ship.style.background='black';
+  ship.style.top = '47.5%';
+  ship.style.background='grey';
+  ship.style.border='1px solid black';
+  ship.style.borderRadius='3px';
   ship.style.left = 0;
   ship.vel = 0;
   document.body.appendChild(ship);
@@ -28,7 +32,7 @@ javascript:(function t() {
   var pipe_top = document.createElement('iframe');
   pipe_top.src = CUR_URL;
   pipe_top.width = PIPE_WIDTH+'%';
-  pipe_top.height = Math.floor(Math.random() * 71)+'%';
+  pipe_top.height = Math.floor(Math.random() * 81)+'%';
   pipe_top.style.position = 'absolute';
   pipe_top.style.top = '0';
   pipe_top.style.right = '0';
@@ -39,7 +43,7 @@ javascript:(function t() {
   var pipe_bot = document.createElement('iframe');
   pipe_bot.src = CUR_URL;
   pipe_bot.width = PIPE_WIDTH+'%';
-  pipe_bot.height = (100 - parseInt(pipe_top.height) - 30) + '%';
+  pipe_bot.height = (100 - parseInt(pipe_top.height) - 20) + '%';
   pipe_bot.style.position = 'absolute';
   pipe_bot.style.bottom = '0';
   pipe_bot.style.right = '0';
@@ -92,12 +96,12 @@ javascript:(function t() {
     jQuery(start_button).hide();
 
     jQuery(document.body).on('click', function() {
-      ship.vel = 1.5;
+      ship.vel = 1.7;
     });
 
     y = setInterval(function() {
       // update ship velocity, location, and rotation
-      ship.vel -= .11;
+      ship.vel -= .13;
       ship.style.webkitTransform = "rotate("+ship.vel*-7+"deg)";
       ship.style.top = (parseFloat(ship.style.top) - ship.vel) + '%';
 
@@ -105,25 +109,17 @@ javascript:(function t() {
       pipe_top.style.right = (parseFloat(pipe_top.style.right) + PIPE_VEL) + '%';
       pipe_bot.style.right = (parseFloat(pipe_bot.style.right) + PIPE_VEL) + '%';
      
-      // update score
-      score.innerHTML = parseInt(score.innerHTML) + PIPE_VEL;
-      if (parseInt(score.innerHTML) < 10) {
-        
-      } else if (parseInt(score.innerHTML) % 500 < 5) {
-        score.style.fontSize='100px';
-      } else if (parseInt(score.innerHTML) % 100 < 5) {
-        score.style.fontSize='50px';
-      } else {
-        score.style.fontSize='30px';
-      }
-
       // reset pipes if off screen
       if (parseFloat(pipe_top.style.right) >= 100) {
         pipe_top.style.right = 0;
         pipe_bot.style.right = 0;
         
-        pipe_top.height = Math.floor(Math.random() * 71)+'%';
-        pipe_bot.height = (100 - parseInt(pipe_top.height) - 30) + '%';
+        pipe_top.height = Math.floor(Math.random() * 81)+'%';
+        pipe_bot.height = (100 - parseInt(pipe_top.height) - 20) + '%';
+      
+        // update score
+        score.innerHTML = parseInt(score.innerHTML) + 1;
+
       }
       
       // test if have lost
@@ -140,8 +136,8 @@ javascript:(function t() {
         
         PIPE_VEL = PIPE_MOVE;
 
-        ship.style.top = 0;
-
+        ship.style.top = '47.5%';
+        ship.style.webkitTransform='';
         pipe_top.style.right = 0; 
         pipe_bot.style.right = 0; 
 

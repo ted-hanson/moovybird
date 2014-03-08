@@ -10,8 +10,14 @@ javascript:(function t() {
 
   var logo_src = (logo) ? logo.src : 'http://static2.businessinsider.com/image/52f914bd6da811fa73092e3f-960/flappy-bird-icon-faby.jpg'; 
 
-
   // remove page
+  document.body.parentNode.style.height = '100%';
+  document.body.parentNode.style.width = '100%';
+  document.body.style.height = '100%';
+  document.body.style.width = '100%';
+  document.body.style.background = 'url(http://data3.whicdn.com/images/100689138/large.jpg) repeat-x';
+  document.body.style.backgroundSize = 'auto 100%';
+  document.body.style.backgroundPositionX = '0px';
   document.body.innerHTML = '';
 
   // MOOVBIRDY
@@ -21,10 +27,10 @@ javascript:(function t() {
   ship.style.height = '5%';
   ship.style.position = 'absolute';
   ship.style.top = '47.5%';
-  ship.style.background='grey';
+  ship.style.background='transparent';
   ship.style.border='1px solid black';
   ship.style.borderRadius='3px';
-  ship.style.left = 0;
+  ship.style.left = '5%';
   ship.vel = 0;
   document.body.appendChild(ship);
 
@@ -38,6 +44,7 @@ javascript:(function t() {
   pipe_top.style.right = '0';
   pipe_top.style.border = '1px solid black';
   pipe_top.style.pointerEvents='none';
+  pipe_top.style.webkitUserSelect='none';
 
   //bottom pipe
   var pipe_bot = document.createElement('iframe');
@@ -49,6 +56,7 @@ javascript:(function t() {
   pipe_bot.style.right = '0';
   pipe_bot.style.border = '1px solid black';
   pipe_bot.style.pointerEvents='none';
+  pipe_bot.style.webkitUserSelect='none';
 
   //start button
   var start_button = document.createElement('img');
@@ -59,19 +67,20 @@ javascript:(function t() {
   start_button.style.width = '100px';
   start_button.style.height = '100px';
   start_button.style.margin = '-50px -50px 0 0';
+  start_button.style.border = '1px solid black';
+  start_button.style.borderRadius = '20px';
 
   var score = document.createElement('div');
-  score.style.fontSize = '30px';
+  score.style.fontSize = '50px';
+  score.style.fontWeight = 'bold';
   score.style.textAlign = 'center';
-  score.style.margin = 'auto';
+  score.style.padding = '100px 0 0';
+  score.style.color = 'white';
+  score.style.textShadow = '2px 3px 0px #000';
+  score.style.webkitUserSelect='none';
 
   score.innerHTML = 0;
 
-  document.body.style.height = '100%';
-  document.body.style.width = '100%';
-  
-  document.body.parentNode.style.height = '100%';
-  document.body.parentNode.style.width = '100%';
 
   document.body.appendChild(pipe_top);
   document.body.appendChild(pipe_bot);
@@ -86,9 +95,9 @@ javascript:(function t() {
     var pipe_bottom   = parseFloat(pipe_top.height);
     var ship_top      = parseFloat(ship.style.top);
 
-    var canhit = (pipe_right + 30 >= 100);  
+    var canhit = (pipe_right + 30 >= 95) && (pipe_right < 95);  
     var hittop = (pipe_bottom > ship_top);
-    var hitbot = (pipe_bottom + 30 < ship_top + 5);
+    var hitbot = (pipe_bottom + 20 < ship_top + 5);
     return canhit && (hittop || hitbot);
   }
 
@@ -108,7 +117,8 @@ javascript:(function t() {
       // update pipes x pos
       pipe_top.style.right = (parseFloat(pipe_top.style.right) + PIPE_VEL) + '%';
       pipe_bot.style.right = (parseFloat(pipe_bot.style.right) + PIPE_VEL) + '%';
-     
+//      document.body.style.backgroundPositionX = parseFloat(document.body.style.backgroundPositionX) + PIPE_VEL +'px';
+    
       // reset pipes if off screen
       if (parseFloat(pipe_top.style.right) >= 100) {
         pipe_top.style.right = 0;
@@ -135,6 +145,9 @@ javascript:(function t() {
         score.innerHTML = '0';
         
         PIPE_VEL = PIPE_MOVE;
+        pipe_top.height = Math.floor(Math.random() * 81)+'%';
+        pipe_bot.height = (100 - parseInt(pipe_top.height) - 20) + '%';
+      
 
         ship.style.top = '47.5%';
         ship.style.webkitTransform='';

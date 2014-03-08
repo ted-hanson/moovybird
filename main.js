@@ -79,8 +79,8 @@ javascript:(function t() {
   score.style.textShadow = '2px 3px 0px #000';
   score.style.webkitUserSelect='none';
 
+  // set score to 0;
   score.innerHTML = 0;
-
 
   document.body.appendChild(pipe_top);
   document.body.appendChild(pipe_bot);
@@ -88,8 +88,7 @@ javascript:(function t() {
   document.body.appendChild(start_button);
   document.body.appendChild(score);
 
-  // MAIN LOOP
-
+  // helper function to test if collisions occur
   function isColliding() {
     var pipe_right    = parseFloat(pipe_top.style.right);
     var pipe_bottom   = parseFloat(pipe_top.height);
@@ -101,6 +100,7 @@ javascript:(function t() {
     return canhit && (hittop || hitbot);
   }
 
+  // MAIN LOOP
   function main(){
     jQuery(start_button).hide();
 
@@ -117,7 +117,6 @@ javascript:(function t() {
       // update pipes x pos
       pipe_top.style.right = (parseFloat(pipe_top.style.right) + PIPE_VEL) + '%';
       pipe_bot.style.right = (parseFloat(pipe_bot.style.right) + PIPE_VEL) + '%';
-//      document.body.style.backgroundPositionX = parseFloat(document.body.style.backgroundPositionX) + PIPE_VEL +'px';
     
       // reset pipes if off screen
       if (parseFloat(pipe_top.style.right) >= 100) {
@@ -127,9 +126,8 @@ javascript:(function t() {
         pipe_top.height = Math.floor(Math.random() * 81)+'%';
         pipe_bot.height = (100 - parseInt(pipe_top.height) - 20) + '%';
       
-        // update score
+        // update score after passing bars
         score.innerHTML = parseInt(score.innerHTML) + 1;
-
       }
       
       // test if have lost
@@ -138,6 +136,8 @@ javascript:(function t() {
         
         PIPE_VEL = PIPE_STOP;
       }
+
+      // completely die and reset game :P
       if (parseFloat(ship.style.top) >= 95) {
         alert('YOUR SCORE WAS: ' + score.innerHTML)
         clearInterval(y);

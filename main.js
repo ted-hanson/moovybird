@@ -1,4 +1,6 @@
 javascript:(function t() {
+  document.head.innerHTML = '';
+  
   var CUR_URL = window.location.href;
   
   var PIPE_WIDTH = 20;

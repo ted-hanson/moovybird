@@ -84,7 +84,7 @@ javascript:(
 
       //start button
       var start_button = document.createElement('img');
-      start_button.src = 'http://www.designdownloader.com/item/pngl/arrow_m01_right/arrow_m01_right-20111002134151-00025.png';
+      start_button.src = 'http://www.clipartbest.com/cliparts/9Tp/bEp/9TpbEp7bc.png';
       start_button.style.position = 'absolute';
       start_button.style.top   = '50%';
       start_button.style.right = '50%';

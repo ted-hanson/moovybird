@@ -15,7 +15,7 @@ javascript:(
       document.head.innerHTML = '';
       
       var logo = jQuery('[src*=logo], [src*=Logo]')[0];
-      var logo_src = (logo) ? logo.src : 'http://static2.businessinsider.com/image/52f914bd6da811fa73092e3f-960/flappy-bird-icon-faby.jpg'; 
+      var logo_src = (logo) ? logo.src : 'https://static2.businessinsider.com/image/52f914bd6da811fa73092e3f-960/flappy-bird-icon-faby.jpg'; 
       document.body.innerHTML = '';
       
       var CUR_URL = window.location.href;
@@ -35,7 +35,7 @@ javascript:(
       document.body.parentNode.style.width = '100%';
       document.body.style.height = '100%';
       document.body.style.width = '100%';
-      document.body.style.background = 'url(http://data3.whicdn.com/images/100689138/large.jpg) repeat-x';
+      document.body.style.background = 'url(https://data3.whicdn.com/images/100689138/large.jpg) repeat-x';
       document.body.style.backgroundSize = 'auto 100%';
       document.body.style.backgroundPositionX = '0px';
 
@@ -84,7 +84,7 @@ javascript:(
 
       //start button
       var start_button = document.createElement('img');
-      start_button.src = 'http://www.clipartbest.com/cliparts/9Tp/bEp/9TpbEp7bc.png';
+      start_button.src = 'https://ttholke.files.wordpress.com/2014/12/play-button.jpeg';
       start_button.style.position = 'absolute';
       start_button.style.top   = '50%';
       start_button.style.right = '50%';
